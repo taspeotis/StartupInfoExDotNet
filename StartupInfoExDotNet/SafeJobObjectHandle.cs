@@ -1,20 +1,22 @@
 ﻿using System.Runtime.InteropServices;
+using JetBrains.Annotations;
 
 namespace StartupInfoExDotNet;
 
-internal sealed class SafeHandleZeroIsInvalid : SafeHandle
+[PublicAPI]
+public sealed class SafeJobObjectHandle : SafeHandle
 {
-    public SafeHandleZeroIsInvalid(IntPtr existingHandle) : base(IntPtr.Zero, true)
+    public SafeJobObjectHandle(IntPtr existingHandle) : base(IntPtr.Zero, true)
     {
         SetHandle(existingHandle);
     }
+
+    public override bool IsInvalid => handle == IntPtr.Zero;
 
     protected override bool ReleaseHandle()
     {
         return CloseHandle(handle);
     }
-
-    public override bool IsInvalid => handle == IntPtr.Zero;
 
     [DllImport("kernel32.dll", SetLastError = true)]
     private static extern bool CloseHandle(IntPtr handle);

@@ -1,14 +1,17 @@
-﻿using System.Runtime.InteropServices;
-using System.Text;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace StartupInfoExDotNet;
 
-internal static class Kernel32
+public static class SafeJobObjectHandleExtensions
 {
-    private const string DllName = "kernel32.dll";
+    public static Process CreateAssociatedProcess(SafeJobObjectHandle safeHandle, string fileName, string? arguments)
+    {
+        
+    }
 
-    [DllImport(DllName, CharSet = CharSet.Auto, SetLastError = true)]
-    public static extern bool CreateProcess(
+    [DllImport(Constants.Kernel32DllName, CharSet = CharSet.Auto, SetLastError = true)]
+    internal static extern bool CreateProcess(
         string? lpApplicationName,
         string? lpCommandLine,
         IntPtr lpProcessAttributes,
@@ -16,7 +19,7 @@ internal static class Kernel32
         bool bInheritHandles,
         uint dwCreationFlags,
         IntPtr lpEnvironment,
-        [MarshalAs(UnmanagedType.LPTStr)] string? lpCurrentDirectory,
+        string? lpCurrentDirectory,
         StartupInfoEx lpStartupInfo,
         out ProcessInformation lpProcessInformation
     );
@@ -29,12 +32,4 @@ internal static class Kernel32
         public uint dwProcessId = 0;
         public uint dwThreadId = 0;
     }
-    
-    
-// marshall this plus static Start method(IEnumerable attributes)
-    public class StartupInfoEx
-    {
-    
-    }
-
 }

@@ -1,43 +1,27 @@
 using System.Runtime.InteropServices;
+using JetBrains.Annotations;
 
 namespace StartupInfoExDotNet;
 
+[PublicAPI]
 [StructLayout(LayoutKind.Sequential)]
-public sealed class JobObjectBasicLimitInformation
+public struct JobObjectBasicLimitInformation
 {
-    public static SafeHandle CreateJobObject()
-    {
-        var handle = CreateJobObject(IntPtr.Zero, null);
+    public long PerProcessUserTimeLimit;
 
-        if (handle == IntPtr.Zero)
-            Marshal.ThrowExceptionForHR(Marshal.GetHRForLastWin32Error());
+    public long PerJobUserTimeLimit;
 
-        return new SafeHandleZeroIsInvalid(handle);
-    }
+    public JobObjectLimit LimitFlags;
 
-    internal long PerProcessUserTimeLimit;
+    public nuint MinimumWorkingSetSize;
 
-    internal long PerJobUserTimeLimit;
+    public nuint MaximumWorkingSetSize;
 
-    internal JobObjectLimit LimitFlags;
+    public uint ActiveProcessLimit;
 
-    internal nuint MinimumWorkingSetSize;
+    public nuint Affinity;
 
-    internal nuint MaximumWorkingSetSize;
+    public uint PriorityClass;
 
-    internal uint ActiveProcessLimit;
-
-    internal nuint Affinity;
-
-    internal uint PriorityClass;
-
-    internal uint SchedulingClass;
-
-    [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-    private static extern IntPtr CreateJobObject(IntPtr lpJobAttributes, string? lpName);
-
-    /*[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-    private static extern bool SetInformationJobObject(IntPtr hJob,
-        JOBOBJECTINFOCLASS JobObjectInfoClass, IntPtr lpJobObjectInfo,
-        uint cbJobObjectInfoLength);*/
+    public uint SchedulingClass;
 }
