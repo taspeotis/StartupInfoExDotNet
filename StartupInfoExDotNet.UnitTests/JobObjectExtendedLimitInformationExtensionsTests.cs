@@ -10,14 +10,14 @@ public sealed class JobObjectExtendedLimitInformationExtensionsTests
             BasicLimitInformation = { LimitFlags = JobObjectLimit.KillOnJobClose }
         };
 
-        var safeHandle = extendedLimitInformation.CreateJobObject();
+        var safeJobObjectHandle = extendedLimitInformation.CreateJobObject();
 
-        using (safeHandle)
+        using (safeJobObjectHandle)
         {
-            Assert.False(safeHandle.IsClosed);
-            Assert.False(safeHandle.IsInvalid);
+            Assert.False(safeJobObjectHandle.IsClosed);
+            Assert.False(safeJobObjectHandle.IsInvalid);
         }
 
-        Assert.True(safeHandle.IsClosed);
+        Assert.True(safeJobObjectHandle.IsClosed);
     }
 }

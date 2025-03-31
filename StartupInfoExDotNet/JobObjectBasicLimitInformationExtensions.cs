@@ -6,7 +6,7 @@ namespace StartupInfoExDotNet;
 public static class JobObjectBasicLimitInformationExtensions
 {
     [PublicAPI]
-    public static SafeHandle CreateJobObject(this JobObjectExtendedLimitInformation extendedLimitInformation)
+    public static SafeJobObjectHandle CreateJobObject(this JobObjectExtendedLimitInformation extendedLimitInformation)
     {
         var handle = CreateJobObject(IntPtr.Zero, null);
 
