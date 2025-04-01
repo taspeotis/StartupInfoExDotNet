@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using JetBrains.Annotations;
 
-namespace StartupInfoExDotNet;
+namespace ProcThreadAttributeJobListDotNet;
 
 public static class JobObjectBasicLimitInformationExtensions
 {

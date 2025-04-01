@@ -4,7 +4,8 @@
     <File Path=".gitignore" />
     <File Path="LICENSE" />
     <File Path="README.md" />
+    <File Path=".github\workflows\main.yml" />
   </Folder>
-  <Project Path="StartupInfoExDotNet.UnitTests\StartupInfoExDotNet.UnitTests.csproj" Type="Classic C#" />
-  <Project Path="StartupInfoExDotNet\StartupInfoExDotNet.csproj" Type="Classic C#" />
+  <Project Path="ProcThreadAttributeJobListDotNet.UnitTests\ProcThreadAttributeJobListDotNet.UnitTests.csproj" Type="Classic C#" />
+  <Project Path="ProcThreadAttributeJobListDotNet\ProcThreadAttributeJobListDotNet.csproj" Type="Classic C#" />
 </Solution>

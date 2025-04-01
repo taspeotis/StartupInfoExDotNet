@@ -1,4 +1,4 @@
-namespace StartupInfoExDotNet.UnitTests;
+namespace ProcThreadAttributeJobListDotNet.UnitTests;
 
 public sealed class SafeJobObjectHandleExtensionsTests
 {

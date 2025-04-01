@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace StartupInfoExDotNet;
+namespace ProcThreadAttributeJobListDotNet;
 
 public static class SafeJobObjectHandleExtensions
 {

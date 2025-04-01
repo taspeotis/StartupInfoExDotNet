@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace StartupInfoExDotNet;
+namespace ProcThreadAttributeJobListDotNet;
 
 [StructLayout(LayoutKind.Sequential)]
 internal sealed class ProcessInformation

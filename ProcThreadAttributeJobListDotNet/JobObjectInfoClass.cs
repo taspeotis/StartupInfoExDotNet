@@ -1,6 +1,6 @@
 using JetBrains.Annotations;
 
-namespace StartupInfoExDotNet;
+namespace ProcThreadAttributeJobListDotNet;
 
 [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
 internal enum JobObjectInfoClass

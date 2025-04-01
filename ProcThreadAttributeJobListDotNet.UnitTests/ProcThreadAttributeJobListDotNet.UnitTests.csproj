@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\StartupInfoExDotNet\StartupInfoExDotNet.csproj" />
+      <ProjectReference Include="..\ProcThreadAttributeJobListDotNet\ProcThreadAttributeJobListDotNet.csproj" />
     </ItemGroup>
 
 </Project>

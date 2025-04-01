@@ -1,4 +1,4 @@
-namespace StartupInfoExDotNet;
+namespace ProcThreadAttributeJobListDotNet;
 
 internal enum ProcThreadAttribute : uint
 {

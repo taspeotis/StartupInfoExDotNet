@@ -3,7 +3,7 @@ name: ProcThreadAttributeJobListDotNet
 on: [ push, workflow_dispatch ]
 
 jobs:
-  test:
+  test-and-pack:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
@@ -13,3 +13,8 @@ jobs:
         dotnet-version: '9.x'
 
     - run: dotnet test
+
+    - run: dotnet pack
+      # TODO: where to put the artifacts
+      # also todo: it's release by default right?
+      

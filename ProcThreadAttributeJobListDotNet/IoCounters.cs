@@ -1,6 +1,6 @@
 using JetBrains.Annotations;
 
-namespace StartupInfoExDotNet;
+namespace ProcThreadAttributeJobListDotNet;
 
 [PublicAPI]
 public struct IoCounters
