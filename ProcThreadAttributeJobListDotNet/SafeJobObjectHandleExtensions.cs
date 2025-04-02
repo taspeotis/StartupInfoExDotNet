@@ -60,10 +60,10 @@ public static class SafeJobObjectHandleExtensions
     );
 
     [DllImport(Constants.Kernel32DllName, SetLastError = true)]
-    internal static extern bool InitializeProcThreadAttributeList(
+    private static extern bool InitializeProcThreadAttributeList(
         IntPtr attributeList, uint attributeCount, uint flags, ref nuint lpSize);
 
     [DllImport(Constants.Kernel32DllName, SetLastError = true)]
-    internal static extern bool UpdateProcThreadAttribute(IntPtr attributeList, uint flags,
+    private static extern bool UpdateProcThreadAttribute(IntPtr attributeList, uint flags,
         nuint attribute, ref IntPtr value, nuint cbSize, IntPtr previousValue, IntPtr returnSize);
 }

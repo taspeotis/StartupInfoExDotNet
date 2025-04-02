@@ -1,19 +1,22 @@
+using JetBrains.Annotations;
+
 namespace ProcThreadAttributeJobListDotNet;
 
+[UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
 internal enum ProcThreadAttribute : uint
 {
-    ParentProcess = 131072U,
-    HandleList = 131074U,
-    GroupAffinity = 196611U,
-    PreferredNode = 131076U,
-    IdealProcessor = 196613U,
-    UmsThread = 196614U,
-    MitigationPolicy = 131079U,
-    SecurityCapabilities = 131081U,
-    ProtectionLevel = 131083U,
-    MachineType = 131097U,
-    EnableOptionalXstateFeatures = 196635U,
-    JobList = 131085U,
-    ChildProcessPolicy = 131086U,
-    DesktopAppPolicy = 131090U
+    ParentProcess = 0x20000U,
+    HandleList = 0x20002U,
+    GroupAffinity = 0x30003U,
+    PreferredNode = 0x20004U,
+    IdealProcessor = 0x30005U,
+    UmsThread = 0x30006U,
+    MitigationPolicy = 0x20007U,
+    SecurityCapabilities = 0x20009U,
+    ProtectionLevel = 0x2000BU,
+    MachineType = 0x20019U,
+    EnableOptionalXstateFeatures = 0x3001BU,
+    JobList = 0x2000DU,
+    ChildProcessPolicy = 0x2000EU,
+    DesktopAppPolicy = 0x20012U
 }

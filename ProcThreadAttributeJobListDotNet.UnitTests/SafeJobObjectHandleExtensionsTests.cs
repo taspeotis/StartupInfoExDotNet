@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices;
+
 namespace ProcThreadAttributeJobListDotNet.UnitTests;
 
 public sealed class SafeJobObjectHandleExtensionsTests
@@ -12,14 +14,12 @@ public sealed class SafeJobObjectHandleExtensionsTests
 
         using var safeJobObjectHandle = extendedLimitInformation.CreateJobObject();
         using var process = safeJobObjectHandle.CreateAssociatedProcess("notepad.exe");
+        var result = false;
+
+        Assert.True(IsProcessInJob(process.SafeHandle, safeJobObjectHandle, ref result));
+        Assert.True(result);
     }
-    
-    /*
-     * + internalsVisibleTo
-     * BOOL IsProcessInJob(
-  [in]           HANDLE ProcessHandle,
-  [in, optional] HANDLE JobHandle,
-  [out]          PBOOL  Result
-);
-     */
+
+    [DllImport(Constants.Kernel32DllName, SetLastError = true)]
+    private static extern bool IsProcessInJob(SafeHandle processHandle, SafeHandle jobHandle, ref bool result);
 }
