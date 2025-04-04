@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using Microsoft.Win32.SafeHandles;
 
 namespace ProcThreadAttributeJobListDotNet;
 
@@ -31,12 +32,35 @@ public static class SafeJobObjectHandleExtensions
                         ref handle, (nuint)IntPtr.Size, IntPtr.Zero, IntPtr.Zero))
                     Marshal.ThrowExceptionForHR(Marshal.GetHRForLastWin32Error());
 
-                // Startup Info Ex!
-                throw new NotImplementedException();
+                var startupInfoEx = new StartupInfoEx
+                {
+                    AttributeList = attributeList,
+                    // https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-startupinfoexa#remarks
+                    // "Be sure to set the cb member of the STARTUPINFO structure to sizeof(STARTUPINFOEX)."
+                    StartupInfo = { cb = (uint)Marshal.SizeOf<StartupInfoEx>() }
+                };
+
+                var processInformation = new ProcessInformation();
+
+                var ret = CreateProcess(fileName, argument, IntPtr.Zero, IntPtr.Zero, false,
+                    ProcessCreationFlags.ExtendedStartupInfoPresent,
+                    IntPtr.Zero, null, startupInfoEx, processInformation);
+                
+                if (!ret)
+                    Marshal.ThrowExceptionForHR(Marshal.GetHRForLastWin32Error());
+
+                try
+                {
+                    return Process.GetProcessById((int)processInformation.dwProcessId);
+                }
+                finally
+                {
+                    // closeHandle x2
+                }
             }
             finally
             {
-                // delete proc list
+                DeleteProcThreadAttributeList(attributeList);
             }
         }
         finally
@@ -52,12 +76,15 @@ public static class SafeJobObjectHandleExtensions
         IntPtr lpProcessAttributes,
         IntPtr lpThreadAttributes,
         bool bInheritHandles,
-        uint dwCreationFlags,
+        ProcessCreationFlags dwCreationFlags,
         IntPtr lpEnvironment,
         string? lpCurrentDirectory,
         StartupInfoEx lpStartupInfo,
-        out ProcessInformation lpProcessInformation
+        ProcessInformation lpProcessInformation
     );
+
+    [DllImport(Constants.Kernel32DllName)]
+    private static extern void DeleteProcThreadAttributeList(IntPtr attributeList);
 
     [DllImport(Constants.Kernel32DllName, SetLastError = true)]
     private static extern bool InitializeProcThreadAttributeList(

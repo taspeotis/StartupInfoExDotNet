@@ -1,9 +1,11 @@
 ﻿using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Text;
 
 namespace ProcThreadAttributeJobListDotNet;
 
+[StructLayout(LayoutKind.Sequential)]
 internal sealed class StartupInfoEx
 {
     public StartupInfo StartupInfo;
@@ -11,6 +13,7 @@ internal sealed class StartupInfoEx
     public IntPtr AttributeList;
 }
 
+[StructLayout(LayoutKind.Sequential)]
 internal struct StartupInfo
 {
     /// <summary>The size of the structure, in bytes.</summary>

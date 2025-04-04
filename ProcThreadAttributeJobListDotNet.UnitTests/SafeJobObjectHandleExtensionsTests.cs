@@ -13,7 +13,7 @@ public sealed class SafeJobObjectHandleExtensionsTests
         };
 
         using var safeJobObjectHandle = extendedLimitInformation.CreateJobObject();
-        using var process = safeJobObjectHandle.CreateAssociatedProcess("notepad.exe");
+        using var process = safeJobObjectHandle.CreateAssociatedProcess(@"C:\Windows\System32\notepad.exe");
         var result = false;
 
         Assert.True(IsProcessInJob(process.SafeHandle, safeJobObjectHandle, ref result));

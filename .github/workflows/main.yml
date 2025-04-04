@@ -6,15 +6,12 @@ jobs:
   test-and-pack:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v4
-    
-    - uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: '9.x'
+      - uses: actions/checkout@v4
+        
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.x'
 
-    - run: dotnet test
+      - run: dotnet test
 
-    - run: dotnet pack
-      # TODO: where to put the artifacts
-      # also todo: it's release by default right?
-      
+      - run: dotnet pack
