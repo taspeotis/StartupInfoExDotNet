@@ -18,6 +18,6 @@ public sealed class SafeJobObjectHandle : SafeHandle
         return CloseHandle(handle);
     }
 
-    [DllImport("kernel32.dll", SetLastError = true)]
+    [DllImport(Constants.Kernel32DllName, SetLastError = true)]
     private static extern bool CloseHandle(IntPtr handle);
 }
